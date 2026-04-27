@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('subtitle')->nullable();
+            $table->string('company')->nullable();
             $table->string('duration');
             $table->text('description');
             $table->timestamps();

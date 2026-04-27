@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Experience;
 use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
@@ -12,7 +13,8 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $experiences = Experience::latest()->get();
+        return view('admin.experiences.index', compact('experiences'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.experiences.create');
     }
 
     /**
@@ -28,7 +30,15 @@ class ExperienceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'duration' => 'required',
+            'description' => 'required',
+        ]);
+
+        Experience::create($request->all());
+
+        return redirect()->route('experiences.index')->with('success', 'Created');
     }
 
     /**
@@ -42,24 +52,32 @@ class ExperienceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Experience $experience)
     {
-        //
+        return view('admin.experiences.edit', compact('experience'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Experience $experience)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'duration' => 'required',
+        ]);
+
+        $experience->update($request->all());
+
+        return redirect()->route('experiences.index')->with('success', 'Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Experience $experience)
     {
-        //
+        $experience->delete();
+        return back()->with('success', 'Deleted');
     }
 }

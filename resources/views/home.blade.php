@@ -775,6 +775,87 @@
                 gap: 1rem;
             }
         }
+
+        /* GRID */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* CARD */
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            border-color: #FF2D55;
+            box-shadow: 0 20px 40px rgba(255, 45, 85, 0.2);
+        }
+
+        /* TEXT */
+        .testimonial-text {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        /* AUTHOR SECTION */
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* AVATAR (MAIN FIX) */
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            /* 🔥 IMPORTANT */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2d3748;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* IMAGE INSIDE AVATAR */
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 🔥 IMPORTANT */
+        }
+
+        /* INFO */
+        .author-info h4 {
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* RATING */
+        .rating {
+            margin-top: 15px;
+        }
+
+        .star {
+            color: #FFD700;
+            font-size: 18px;
+        }
     </style>
 </head>
 
@@ -850,36 +931,22 @@
             3 years of building innovative web solutions
         </p>
         <div class="experience-container">
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Laravel Developer</h3>
-                        <p style="color: var(--gray); margin-top: 0.5rem;">Full Stack Development</p>
+
+            @foreach ($experiences as $experience)
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-title">{{ $experience->title }}</h3>
+                            <p style="color: var(--gray); margin-top: 0.5rem;">{{ $experience->company }}</p>
+                        </div>
+                        <div class="experience-duration">{{ $experience->duration }}</div>
                     </div>
-                    <div class="experience-duration">3 Years</div>
+                    <p class="experience-description">
+                        {{ $experience->description }}
+                    </p>
                 </div>
-                <p class="experience-description">
-                    Specialized in developing scalable web applications using Laravel framework.
-                    Worked on multiple complex projects involving e-commerce platforms, content management systems,
-                    and custom business solutions. Implemented RESTful APIs, integrated third-party services,
-                    and optimized database performance for high-traffic applications.
-                </p>
-            </div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Full Stack Development</h3>
-                        <p style="color: var(--gray); margin-top: 0.5rem;">Backend & Frontend</p>
-                    </div>
-                    <div class="experience-duration">Ongoing</div>
-                </div>
-                <p class="experience-description">
-                    Expertise in building complete web solutions from database design to user interface.
-                    Proficient in server-side programming with PHP/Laravel and client-side development using
-                    JavaScript, React.js, and modern frontend frameworks. Strong focus on creating responsive,
-                    user-friendly interfaces and robust backend systems.
-                </p>
-            </div>
+            @endforeach
+
         </div>
     </section>
 
@@ -890,51 +957,24 @@
             Showcasing some of my best work across various domains
         </p>
         <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">🛒</div>
-                <div class="project-content">
-                    <h3 class="project-title">E-Commerce Platform</h3>
-                    <p class="project-description">
-                        Full-featured online shopping platform with payment integration, inventory management,
-                        and real-time order tracking.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">Livewire</span>
-                        <span class="tag">MySQL</span>
+            @foreach ($projects as $project)
+                <div class="project-card">
+                    <div class="project-image">{{ $project->icon }}</div>
+                    <div class="project-content">
+                        <h3 class="project-title">{{ $project->title }}</h3>
+                        <p class="project-description">
+                            {{ $project->description }}
+                        </p>
+                        <div class="project-tags">
+                            @foreach ($project->tags as $tag)
+                                <span class="tag">{{ $tag->tag }}</span>
+                            @endforeach
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image">📱</div>
-                <div class="project-content">
-                    <h3 class="project-title">Business Management System</h3>
-                    <p class="project-description">
-                        Comprehensive CRM and project management tool with advanced reporting,
-                        task automation, and team collaboration features.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">PHP</span>
-                        <span class="tag">React.js</span>
-                        <span class="tag">AJAX</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image">🎨</div>
-                <div class="project-content">
-                    <h3 class="project-title">Content Management System</h3>
-                    <p class="project-description">
-                        Custom CMS with drag-and-drop page builder, SEO optimization tools,
-                        and multi-language support for global content delivery.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">jQuery</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </section>
 
@@ -946,69 +986,45 @@
         </p>
         <div class="testimonials-container">
             <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Exceptional Laravel developer! Delivered our e-commerce platform ahead of schedule.
-                        The code quality is outstanding, and the attention to detail in both backend logic
-                        and frontend design exceeded our expectations. Highly recommended!"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JS</div>
-                        <div class="author-info">
-                            <h4>John Smith</h4>
-                            <p>CEO, TechStart Solutions</p>
+                @foreach ($testimonials as $testimonial)
+                    <div class="testimonial-card">
+
+                        <!-- MESSAGE -->
+                        <p class="testimonial-text">
+                            "{{ $testimonial->message }}"
+                        </p>
+
+                        <!-- AUTHOR -->
+                        <div class="testimonial-author">
+
+                            <!-- AVATAR -->
+                            <div class="author-avatar">
+                                @if ($testimonial->avatar)
+                                    <img src="{{ asset('storage/' . $testimonial->avatar) }}" alt="">
+                                @else
+                                    {{ strtoupper(substr($testimonial->name, 0, 2)) }}
+                                @endif
+                            </div>
+
+                            <!-- INFO -->
+                            <div class="author-info">
+                                <h4>{{ $testimonial->name }}</h4>
+                                <p>{{ $testimonial->designation }}, {{ $testimonial->company }}</p>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Working with this developer was a game-changer for our business. The custom CRM system
-                        built with Laravel has streamlined our operations significantly. Professional,
-                        responsive, and truly understands client needs."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SA</div>
-                        <div class="author-info">
-                            <h4>Sarah Ahmed</h4>
-                            <p>Operations Manager, Digital Hub</p>
+
+                        <!-- ⭐ RATING -->
+                        <div class="rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="star">
+                                    {{ $i <= $testimonial->rating ? '★' : '☆' }}
+                                </span>
+                            @endfor
                         </div>
+
                     </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">
-                        "Impressive technical skills combined with excellent communication. The project was
-                        completed with clean, maintainable code and thorough documentation. Will definitely
-                        hire again for future Laravel projects!"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MR</div>
-                        <div class="author-info">
-                            <h4>Michael Rodriguez</h4>
-                            <p>CTO, Innovate Labs</p>
-                        </div>
-                    </div>
-                    <div class="rating">
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                        <span class="star">★</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
