@@ -17,28 +17,34 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('skills.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('skills.index')" :active="request()->routeIs('skills.index')">
                         {{ __('Skills') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                         {{ __('Projects') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('experiences.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('experiences.index')" :active="request()->routeIs('experiences.index')">
                         {{ __('Experience') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('testimonials.index')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('testimonials.index')" :active="request()->routeIs('testimonials.index')">
                         {{ __('Testimonials') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('dashboard')">
-                        {{ __('Profile') }}
+                    <x-nav-link :href="route('profiles.index')" :active="request()->routeIs('profiles.index')">
+                        {{ __('CV Profile') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                        {{ __('User Profile') }}
                     </x-nav-link>
                 </div>
             </div>

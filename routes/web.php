@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\frontend\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
+
 Route::get('/', [PortfolioController::class, 'index']);
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -34,9 +37,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('projects', ProjectController::class);
     Route::resource('experiences', ExperienceController::class);
     Route::resource('testimonials', TestimonialController::class);
-
-    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('profiles', AdminProfileController::class);
 });
 
 require __DIR__ . '/auth.php';
