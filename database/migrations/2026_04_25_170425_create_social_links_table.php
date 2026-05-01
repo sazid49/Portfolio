@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->string('platform'); // linkedin, github
+            $table->string('name'); // linkedin, github
             $table->string('icon')->nullable(); // emoji or icon class
             $table->string('url');
             $table->timestamps();

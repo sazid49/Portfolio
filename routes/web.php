@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\frontend\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('experiences', ExperienceController::class);
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('profiles', AdminProfileController::class);
+    Route::resource('social', SocialLinkController::class);
 });
 
 require __DIR__ . '/auth.php';

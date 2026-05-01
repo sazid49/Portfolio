@@ -9,6 +9,9 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
 </head>
 
 <body>
@@ -68,12 +71,17 @@
     </section>
 
     <!-- Footer -->
+
+    @php
+        $socialLinks = \App\Models\SocialLink::query()->get();
+    @endphp
     <footer>
         <div class="social-links">
-            <a href="#" class="social-link">💼</a>
-            <a href="#" class="social-link">🔗</a>
-            <a href="#" class="social-link">📧</a>
-            <a href="#" class="social-link">💻</a>
+            @foreach ($socialLinks as $link)
+                <a href="{{ $link->url }}" class="social-link" target="_blank">
+                    {!! $link->icon !!}
+                </a>
+            @endforeach
         </div>
         <p>&copy; 2026 Laravel Developer Portfolio. All rights reserved.</p>
     </footer>
@@ -82,41 +90,58 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                e.preventDefault(); <
+                a href = "#"
+                class = "social-link" > 💻 < /a> < /
+                div > <
+                    p > & copy;
+                2026 Laravel Developer Portfolio.All rights reserved. < /p> < /
+                footer >
+
+                    <
+                    script >
+                    // Smooth scrolling for navigation links
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const target = document.querySelector(this.getAttribute('href'));
+                            if (target) {
+                                target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                            }
+                        });
                     });
-                }
+
+                // Add fade-in animation on scroll
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -100px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in-up');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.skill-card, .experience-card, .project-card, .testimonial-card')
+                    .forEach(el => {
+                        observer.observe(el);
+                    });
+
+                // Parallax effect for background
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const gradient = document.querySelector('.background-gradient');
+                    gradient.style.transform = `translateY(${scrolled * 0.5}px)`;
+                });
+
             });
-        });
-
-        // Add fade-in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-card, .experience-card, .project-card, .testimonial-card').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const gradient = document.querySelector('.background-gradient');
-            gradient.style.transform = `translateY(${scrolled * 0.5}px)`;
         });
     </script>
 </body>
